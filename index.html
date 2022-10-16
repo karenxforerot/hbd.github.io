@@ -84,16 +84,32 @@
               showPortfolioItem(currentItem);
             });
 
+            let videoHelper = true
+
             paintandquestPreviewButton.addEventListener('click', () => {
               paintandquestPreviewButton.setAttribute("visible", false);
               const testVideo = document.createElement( "video" );
               const canplayWebm = testVideo.canPlayType( 'video/webm; codecs="vp8, vorbis"' );
+              
               if (canplayWebm == "") {
                 document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-mp4");
-                document.querySelector("#paintandquest-video-mp4").play();
+                if (videoHelper) {
+                  document.querySelector("#paintandquest-video-mp4").play();
+                  videoHelper = false
+                }else{
+                  document.querySelector("#paintandquest-video-mp4").pause();
+                  videoHelper = true
+                }
               } else {
                 document.querySelector("#paintandquest-video-link").setAttribute("src", "#paintandquest-video-webm");
-                document.querySelector("#paintandquest-video-webm").play();
+                if (videoHelper) {
+                  document.querySelector("#paintandquest-video-webm").play();
+                  videoHelper = false
+                }else{
+                  document.querySelector("#paintandquest-video-webm").pause();
+                  videoHelper = true
+                }
+                
               }
             });
 
@@ -237,8 +253,8 @@
           <img id="hbd" src="./assets/hbd.png" />
           <img id="ballons" src="./assets/ballons.png" />
           <img id="bottom-dec" src="./assets/bottom-dec.png" />
-          <video id="paintandquest-video-mp4" autoplay="false" loop="true" src="./assets/video.mp4"></video>
-          <video id="paintandquest-video-webm" autoplay="false" loop="true" src="./assets/video.webm"></video>
+          <video id="paintandquest-video-mp4" autoplay="false" loop="false" src="./assets/video.mp4"></video>
+          <video id="paintandquest-video-webm" autoplay="false" loop="false" src="./assets/video.webm"></video>
           <img id="coffeemachine-preview" src="./assets/red.JPG" />
           <img id="peak-preview" src="./assets/christmas.jpg" />
         </a-assets>
@@ -246,34 +262,34 @@
         <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable"></a-camera>
 
         <a-entity id="mytarget" mytarget mindar-image-target="targetIndex: 0">
-          <a-plane src="#card" position="0 0 0" height="1" width="0.75" scale="1.1 1.1 1.1" rotation="0 0 0"></a-plane>
+          <a-plane src="#card" position="0 0 0" height="1" width="0.75" scale="1.4 1.4 1.4" rotation="0 0 0"></a-plane>
 
           <a-entity visible=false id="portfolio-panel" position="0 0 -0.01">
 
             <a-entity id="decoration" visible=true>
-              <a-image id="title" class="clickable" src="#hbd" alpha-test="0.5" position="0 0.1 0.1"> </a-image>
-              <a-image id="ballon" class="clickable" src="#ballons" alpha-test="0.5" position="0 0.1 -0.1" scale="1.2 1.2 1.2"> </a-image>
-              <a-image id="bottom" class="clickable" src="#bottom-dec" alpha-test="0.5" position="0 -1.4 -0.1" scale="1 1 1"> </a-image>
+              <a-image id="title" class="clickable" src="#hbd" alpha-test="0.5" position="0 0.2 0.12"> </a-image>
+              <a-image id="ballon" class="clickable" src="#ballons" alpha-test="0.5" position="0 0 0.08" scale="1.2 1.2 1.2"> </a-image>
+              <a-image id="bottom" class="clickable" src="#bottom-dec" alpha-test="0.5" position="0 -1.55 -0.1" scale="1 1 1"> </a-image>
             </a-entity>
 
             <a-entity id="portfolio-item0">
-              <a-video id="paintandquest-video-link" webkit-playsinline playsinline height="1" width="0.75" position="0 -0.6 0.05" scale="1.1 1.1 1.1"></a-video>
-              <a-image id="paintandquest-preview-button" class="clickable" src="#paintandquest-preview" alpha-test="0.5" position="0 -0.6 0.05" height="1" width="0.75" scale="1.1 1.1 1.1"> </a-image>>
+              <a-video id="paintandquest-video-link" webkit-playsinline playsinline height="1" width="0.75" position="0 -0.6 0.05" scale="1.4 1.4 1.4"></a-video>
+              <a-image id="paintandquest-preview-button" class="clickable" src="#paintandquest-preview" alpha-test="0.5" position="0 -0.6 0.05" height="1" width="0.75" scale="1.4 1.4 1.4"> </a-image>>
               </a-image>
             </a-entity>
 
             <a-entity id="portfolio-item1" visible=false>
-              <a-image class="clickable" src="#coffeemachine-preview" alpha-test="0.5" position="0 -0.6 0.05" height="1" width="0.75" scale="1.1 1.1 1.1"> <!--RED -->
+              <a-image class="clickable" src="#coffeemachine-preview" alpha-test="0.5" position="0 -0.6 0.05" height="1" width="0.75" scale="1.4 1.4 1.4"> <!--RED -->
               </a-image>
             </a-entity>
 
             <a-entity id="portfolio-item2" visible=false>
-              <a-image class="clickable" src="#peak-preview" alpha-test="0.5" position="0 -0.6 0.05" height="1" width="0.75" scale="1.1 1.1 1.1"> <!--CHRRSTMAS -->
+              <a-image class="clickable" src="#peak-preview" alpha-test="0.5" position="0 -0.6 0.05" height="1" width="0.75" scale="1.4 1.4 1.4"> <!--CHRRSTMAS -->
               </a-image>
             </a-entity>
 
-            <a-image visible=false id="portfolio-left-button" class="clickable" src="#icon-left" position="-0.5 -0.5 0" height="0.15" width="0.15"></a-image>
-            <a-image visible=false id="portfolio-right-button" class="clickable" src="#icon-right" position="0.5 -0.5 0" height="0.15" width="0.15"></a-image>
+            <a-image visible=false id="portfolio-left-button" class="clickable" src="#icon-left" position="-0.7 -0.5 0" height="0.15" width="0.15"></a-image>
+            <a-image visible=false id="portfolio-right-button" class="clickable" src="#icon-right" position="0.7 -0.5 0" height="0.15" width="0.15"></a-image>
           </a-entity>
         </a-entity>
       </a-scene>
